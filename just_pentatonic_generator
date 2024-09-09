@@ -1,0 +1,35 @@
+def generate_pentatonic_scale(tonic_freq):
+    # Define the ratios for the Just Pentatonic Scale
+    ratios = {
+        'Tonic': 1,
+        'Perfect Fourth': 4/3,
+        'Perfect Fifth': 3/2,
+        'Whole Tone above Tonic': 9/8,
+        'Major Sixth': 27/16
+    }
+    
+    # Calculate frequencies for each pitch in the scale
+    scale = {name: tonic_freq * ratio for name, ratio in ratios.items()}
+    
+    return scale
+
+def main():
+    # Prompt the user for the tonic pitch
+    try:
+        tonic_freq = float(input("Enter the tonic frequency (in Hz): "))
+        if tonic_freq <= 0:
+            raise ValueError("Frequency must be greater than zero.")
+    except ValueError as e:
+        print(f"Invalid input: {e}")
+        return
+
+    # Generate the Just Pentatonic Scale
+    scale = generate_pentatonic_scale(tonic_freq)
+
+    # Print the scale
+    print("\nJust Pentatonic Scale based on the tonic frequency:")
+    for pitch, freq in scale.items():
+        print(f"{pitch}: {freq:.2f} Hz")
+
+if __name__ == "__main__":
+    main()
